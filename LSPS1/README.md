@@ -199,7 +199,74 @@ HTTP Code: 201 CREATED
 
 - 400 Bad request - Request body validation error.
 
-Todo: Define error type better. [Zmn proposal](https://github.com/BitcoinAndLightningLayerSpecs/lsp/pull/21/files#diff-603325abb5c270c90ec7c4c60eec7cb1aae620a8155519c65f974ba33ee63c54R346)
+The error object is returned in case of an error during processing the request body.
+
+```json
+{
+  "error": true,
+  "error_code": "CLIENT_REJECTED",
+  "error_detail": 0
+}
+```
+
+The `error` field is always the Boolean value `true` in case of an
+error.
+
+`error_code` is a simple textual description of the exact error.
+The `error_detail` is a number whose meaning depends on the
+specific `error_code`.
+
+Below are the `error_code`s defined by this version of the
+specification.
+
+* `BAD_REQUEST` - Some expected field of the request is missing,
+  or has an invalid type or value.
+  `error_detail` is `0`.
+* `CLIENT_BALANCE_TOO_LOW` - The requested `client_balance` is
+  below some policy-mandated value.
+  `error_detail` is the minimum value allowed, in satoshis.
+* `CLIENT_BALANCE_TOO_HIGH` - The requested `client_balance` is
+  above some policy-mandated value.
+  `error_detail` is the maximum value allowed, in satoshis.
+* `LSP_BALANCE_TOO_LOW` - The requested `lsp_balance` is
+  below some policy-mandated value.
+  `error_detail` is the minimum value allowed, in satoshis.
+* `LSP_BALANCE_TOO_HIGH` - The requested `lsp_balance` is
+  above some policy-mandated value.
+  `error_detail` is the maximum value allowed, in satoshis.
+* `CHANNEL_BALANCE_TOO_LOW` - The sum of the requested
+  `client_balance` and `lsp_balance` is below some policy-mandated
+   value.
+  `error_detail` is the minimum value allowed, in satoshis.
+* `CHANNEL_BALANCE_TOO_LOW` - The sum of the requested
+  `client_balance` and `lsp_balance` is above some policy-mandated
+   value.
+  `error_detail` is the maximum value allowed, in satoshis.
+* `CLIENT_REJECTED` - The client provided node ID or its IP
+  address has been rejected by some LSP policy.
+  `error_detail` is `0`.
+
+**LSP**
+- MAY return an `error_code` that is not listed above.
+
+**Wallets**
+- MUST be able to handle an `error_code` that is not listed
+  above.
+  - SHOULD report an unrecognized error code simply as
+    "unrecognized error code".
+  - **Rationale** This allows wallets written for older versions
+    of this specification to work with LSPs written for newer
+    versions.
+- MUST NOT display un unrecognized `error_code`, or its
+  `error_detail`, to the user unless it is in a "developer" or
+  "advanced" mode.
+  **Rationale** Unrecognized `error_code`s may be misinterpreted
+  or misunderstood by users.
+
+**Rationale** There is no human-readable error message, as
+these may be misleading (deliberately or accidentally), or
+may include text that requires special escaping in certain
+display context (e.g. `<` in HTML contexts).
 
 ### 3. Payment
 

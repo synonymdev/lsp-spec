@@ -432,10 +432,6 @@ components:
               - PEERING_FAILED # Couldn't establish a peer connection
               - REJECTED_BY_LSP # LSP rejected node.
               - PAYMENT_REQUIRED
-          message:
-            type: string
-            description: "Human readable message"
-            example: "ok"
 
       ChannelOpenResponse:
         type: "object"
@@ -444,10 +440,6 @@ components:
             type: boolean
             description: "Indicates if the channel has been opened."
             example: true
-          message:
-            type: string
-
-            example: "ok"
           fail_reason:
             type: string
             nullable: true
@@ -467,18 +459,24 @@ components:
       BadRequestResponse:
         type: object
         properties:
-          message:
-            type: string
-            description: "Human readable message that describe the error"
-            example: "Property remote_balance must be above or equal 1."
-          code:
+          error:
+            type: boolean
+            description: "Exists and set to true if en error occurred."
+            example: true
+          error_code:
             type: string
             description: "Error code"
             example: "BAD_REQUEST"
             enum:
               - "BAD_REQUEST"       
-          
-          
-          
-          
-            
+              - "CLIENT_BALANCE_TOO_LOW"
+              - "CLIENT_BALANCE_TOO_HIGH"
+              - "LSP_BALANCE_TOO_LOW"
+              - "LSP_BALANCE_TOO_HIGH"
+              - "CHANNEL_BALANCE_TOO_LOW"
+              - "CHANNEL_BALANCE_TOO_HIGH"
+              - "CLIENT_REJECTED"
+          error_detail:
+            type: number
+            description: "Detail of the error"
+            example: 42
