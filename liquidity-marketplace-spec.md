@@ -1,7 +1,6 @@
 # Liquidity marketplace spec
 
-**This liquidity marketplace spec is OBSOLETE**. The quality of this spec is not sufficient 
-and the interest to improve it is not here currently. Therefore, we made this obsolete. We discourage any usage.
+**This liquidity marketplace specification is OBSOLETE**. The quality of this specification is not sufficient and there is currently no interest to improve it. Therefore, we have made it obsolete. We discourage any usage.
 
 ## Version: 0.0.1
 
