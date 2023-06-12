@@ -41,6 +41,8 @@ under this specification.
 
 ### Monetary Amounts
 
+<a name="_sat">_sat</a>
+
 Monetary amounts MUST be expressed in either millisatoshi or satoshi
 units.
 
