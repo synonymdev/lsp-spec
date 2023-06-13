@@ -41,8 +41,8 @@ under this specification.
 
 ### Monetary Amounts
 
-###### LSPS0.sat
-###### LSPS0.msat
+###### Link: LSPS0.sat
+###### Link: LSPS0.msat
 
 Monetary amounts MUST be expressed in either millisatoshi or satoshi
 units.
