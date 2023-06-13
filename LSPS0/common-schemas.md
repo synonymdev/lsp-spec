@@ -345,11 +345,11 @@ Example:
 
 
 
-### VOUT
+### Output Index
 
-###### Link: LSPS0.vout
+###### Link: LSPS0.output_index
 
-`vout` is the 0 based output index for transaction output UTXOs. It is a maximum of 32 bits (4 bytes). It MUST be represented as a JSON integer (number).
+`output_index` is the 0 based index for transaction output UTXOs. It is a maximum of [16 bits (2 bytes)](https://github.com/lightning/bolts/blob/aad959a297ff66946effb165518143be15777dd6/07-routing-gossip.md#definition-of-short_channel_id). It MUST be represented as a JSON integer (number).
 
 Example:
 
